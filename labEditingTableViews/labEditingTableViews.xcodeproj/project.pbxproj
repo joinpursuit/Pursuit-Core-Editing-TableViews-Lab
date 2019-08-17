@@ -13,6 +13,7 @@
 		FCAB1D1A23073D8100E496B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCAB1D1823073D8100E496B6 /* LaunchScreen.storyboard */; };
 		FCAB1D222307428700E496B6 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB1D212307428700E496B6 /* ShoppingViewController.swift */; };
 		FCAB1D242307436200E496B6 /* ShoppingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB1D232307436200E496B6 /* ShoppingData.swift */; };
+		FCAB1D26230750D400E496B6 /* NewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB1D25230750D400E496B6 /* NewItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		FCAB1D1B23073D8100E496B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCAB1D212307428700E496B6 /* ShoppingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
 		FCAB1D232307436200E496B6 /* ShoppingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingData.swift; sourceTree = "<group>"; };
+		FCAB1D25230750D400E496B6 /* NewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				FCAB1D212307428700E496B6 /* ShoppingViewController.swift */,
+				FCAB1D25230750D400E496B6 /* NewItemViewController.swift */,
 				FCAB1D1323073D8000E496B6 /* Main.storyboard */,
 				FCAB1D232307436200E496B6 /* ShoppingData.swift */,
 				FCAB1D1623073D8100E496B6 /* Assets.xcassets */,
@@ -140,6 +143,7 @@
 			files = (
 				FCAB1D242307436200E496B6 /* ShoppingData.swift in Sources */,
 				FCAB1D222307428700E496B6 /* ShoppingViewController.swift in Sources */,
+				FCAB1D26230750D400E496B6 /* NewItemViewController.swift in Sources */,
 				FCAB1D1023073D8000E496B6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
