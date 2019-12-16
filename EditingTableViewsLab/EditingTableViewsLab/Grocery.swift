@@ -10,10 +10,19 @@ import Foundation
 
 struct Grocery {
     
-    enum Status: String, Comparable {
+    enum Status: Int, Comparable, CustomStringConvertible {
         
-        case notPurchased = "Not Purchased"
-        case purchased = "Purchased"
+        case notPurchased
+        case purchased
+        
+        var description: String {
+            switch self {
+            case .notPurchased:
+                return "Not Purchased"
+            case .purchased:
+                return "Purchased"
+            }
+        }
         
         static func < (lhs: Grocery.Status, rhs: Grocery.Status) -> Bool {
             lhs == .notPurchased && rhs == .purchased ? true : false

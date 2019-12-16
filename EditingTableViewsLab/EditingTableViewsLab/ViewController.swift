@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CreateViewControllerDelegate: AnyObject {
+    func updateGroceries(_ grocery: Grocery)
+}
+
 class ViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
@@ -22,7 +26,9 @@ class ViewController: UIViewController {
         return button
     }()
     
-    private var groceries = Dictionary(grouping: Grocery.getGroceries, by: {$0.status})
+    
+    
+    private var groupedGroceries = Dictionary(grouping: Grocery.getGroceries, by: {$0.status})
         .sorted(by: { $0.key < $1.key }) {
         didSet {
             tableView.reloadData()
@@ -36,7 +42,9 @@ class ViewController: UIViewController {
     
     @objc private func presentVC() {
         print("Button pressed")
-        self.navigationController?.present(CreateViewController(), animated: true, completion: nil)
+        let createVC = CreateViewController()
+        createVC.delegate = self
+        self.navigationController?.present(createVC, animated: true, completion: nil)
     }
     
     private func configureView() {
@@ -75,34 +83,48 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("deleted")
-            groceries[indexPath.section].value.remove(at: indexPath.row)
-            if groceries[indexPath.section].value.count == 0 {
-                groceries.remove(at: indexPath.section)
+            groupedGroceries[indexPath.section].value.remove(at: indexPath.row)
+            if groupedGroceries[indexPath.section].value.count == 0 {
+                groupedGroceries.remove(at: indexPath.section)
             }
         }
     }
-    
-    
+
 }
+
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return groceries[section].key.rawValue
+        return groupedGroceries[section].key.description
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groceries.count
+        return groupedGroceries.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groceries[section].value.count
+        return groupedGroceries[section].value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Grocery Cell", for: indexPath)
-        let grocery = groceries[indexPath.section].value[indexPath.row]
+        let grocery = groupedGroceries[indexPath.section].value[indexPath.row]
         cell.textLabel?.text = grocery.item
         return cell
     }
 
+}
+
+extension ViewController: CreateViewControllerDelegate {
+    func updateGroceries(_ grocery: Grocery) {
+        switch grocery.status {
+        case .notPurchased:
+            groupedGroceries[grocery.status.rawValue].value.append(grocery)
+            groupedGroceries[grocery.status.rawValue].value.sort(by: {$0.item < $1.item})
+        case .purchased:
+            groupedGroceries[grocery.status.rawValue].value.append(grocery)
+            groupedGroceries[grocery.status.rawValue].value.sort(by: {$0.item < $1.item})
+        }
+        print("Updated Groceries")
+    }
 }
